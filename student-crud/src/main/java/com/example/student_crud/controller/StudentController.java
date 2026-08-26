@@ -19,8 +19,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateStudentReqDto> createStudent(CreateStudentReqDto studentReqDto){
-
+    public ResponseEntity<CreateStudentRespDto> createStudent(CreateStudentReqDto studentReqDto){
+   CreateStudentRespDto studentRespDto =  studentService.createStudent(studentReqDto);
 
     }
 
