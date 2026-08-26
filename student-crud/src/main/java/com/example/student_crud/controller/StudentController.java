@@ -4,6 +4,7 @@ import com.example.student_crud.dto.CreateStudentReqDto;
 import com.example.student_crud.dto.CreateStudentRespDto;
 import com.example.student_crud.service.StudentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,11 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @PostMapping
+    public ResponseEntity<CreateStudentReqDto> createStudent(CreateStudentReqDto studentReqDto){
+
+
+    }
 
 
 }
