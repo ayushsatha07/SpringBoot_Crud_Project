@@ -2,6 +2,8 @@ package com.example.student_crud.controller;
 
 import com.example.student_crud.dto.CreateStudentReqDto;
 import com.example.student_crud.dto.CreateStudentRespDto;
+import com.example.student_crud.dto.UpdateStudentReqDto;
+import com.example.student_crud.dto.UpdateStudentRespDto;
 import com.example.student_crud.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +26,9 @@ public class StudentController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<CreateStudentRespDto> updateById(@PathVariable long id){
-
+    public ResponseEntity<UpdateStudentRespDto> updateById(@PathVariable long id,
+                                                           UpdateStudentReqDto studentReqDto){
+       UpdateStudentRespDto studentResp = studentService.updateById(id,studentReqDto);
     }
 
 }
