@@ -2,6 +2,8 @@ package com.example.student_crud.service;
 
 import com.example.student_crud.dto.CreateStudentReqDto;
 import com.example.student_crud.dto.CreateStudentRespDto;
+import com.example.student_crud.dto.UpdateStudentReqDto;
+import com.example.student_crud.dto.UpdateStudentRespDto;
 import com.example.student_crud.entity.Student;
 import com.example.student_crud.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -60,4 +63,7 @@ public class StudentService {
         return student;
     }
 
+    public UpdateStudentRespDto updateById(long id , UpdateStudentReqDto studentReqDto) {
+        Optional<Student> student = repository.findbyIdAndIsDeletedIsFalse(id);
+    }
 }
