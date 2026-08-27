@@ -64,6 +64,9 @@ public class StudentService {
     }
 
     public UpdateStudentRespDto updateById(long id , UpdateStudentReqDto studentReqDto) {
-        Optional<Student> student = repository.findbyIdAndIsDeletedIsFalse(id);
+        Optional<Student> studentExist = repository.findByIdAndIsDeletedIsFalse(id);
+        if(studentExist.isEmpty()) return null;
+        Student student = studentExist.get();
+
     }
 }
