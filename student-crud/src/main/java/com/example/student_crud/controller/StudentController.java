@@ -29,6 +29,8 @@ public class StudentController {
     public ResponseEntity<UpdateStudentRespDto> updateById(@PathVariable long id,
                                                            UpdateStudentReqDto studentReqDto){
        UpdateStudentRespDto studentResp = studentService.updateById(id,studentReqDto);
+       if(studentResp==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+       return ResponseEntity.status(HttpStatus.OK).body(studentResp);
     }
 
 }
