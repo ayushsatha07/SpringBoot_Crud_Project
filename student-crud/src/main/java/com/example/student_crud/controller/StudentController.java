@@ -36,5 +36,7 @@ public class StudentController {
     @GetMapping("/get/{id}")
     public ResponseEntity<GetStudentResponceDto> getById(@PathVariable long id){
       GetStudentResponceDto studentResponceDto = studentService.getById(id);
+      if(studentResponceDto==null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+      return ResponseEntity.status(HttpStatus.OK).body(studentResponceDto);
     }
 }
