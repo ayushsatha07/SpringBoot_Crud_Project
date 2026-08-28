@@ -1,7 +1,7 @@
 package com.example.student_crud.service;
 
 import com.example.student_crud.dto.CreateStudentReqDto;
-import com.example.student_crud.dto.CreateStudentRespDto;
+import com.example.student_crud.dto.GetStudentResponceDto;
 import com.example.student_crud.dto.UpdateStudentReqDto;
 import com.example.student_crud.dto.UpdateStudentRespDto;
 import com.example.student_crud.entity.Student;
@@ -9,7 +9,6 @@ import com.example.student_crud.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -23,14 +22,14 @@ public class StudentService {
         this.repository = repository;
     }
 
-    public CreateStudentRespDto createStudent(CreateStudentReqDto studentRespDto){
+    public GetStudentResponceDto createStudent(CreateStudentReqDto studentRespDto){
        Student student = mapToStudent(studentRespDto);
        repository.save(student);
        return MapToResponceDto(student);
     }
 
-    private CreateStudentRespDto MapToResponceDto(Student student) {
-        CreateStudentRespDto studentRespDto = new CreateStudentRespDto();
+    private GetStudentResponceDto MapToResponceDto(Student student) {
+        GetStudentResponceDto studentRespDto = new GetStudentResponceDto();
         studentRespDto.setId(student.getId());
         studentRespDto.setName(student.getName());
         studentRespDto.setEmail(student.getEmail());
@@ -95,6 +94,13 @@ public class StudentService {
         studentRespDto.setRollNo(student.getRollNo());
         studentRespDto.setCity(student.getCity());
         return studentRespDto;
+    }
+
+    public GetStudentResponceDto getById(long id){
+       Optional<Student> student = repository.findByIdAndIsDeletedIsFalse(id);
+       if (student.isEmpty()) return null;
+       Student student1 = student.get();
+       return MapToResponceDto(student1);
     }
 
 }
