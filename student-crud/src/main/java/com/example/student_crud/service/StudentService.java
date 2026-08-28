@@ -29,7 +29,6 @@ public class StudentService {
        return MapToResponceDto(student);
     }
 
-
     private CreateStudentRespDto MapToResponceDto(Student student) {
         CreateStudentRespDto studentRespDto = new CreateStudentRespDto();
         studentRespDto.setId(student.getId());
@@ -66,7 +65,36 @@ public class StudentService {
     public UpdateStudentRespDto updateById(long id , UpdateStudentReqDto studentReqDto) {
         Optional<Student> studentExist = repository.findByIdAndIsDeletedIsFalse(id);
         if(studentExist.isEmpty()) return null;
-        Student student = studentExist.get();
 
+        Student student = studentExist.get();
+        student.setName(studentReqDto.getName());
+        student.setEmail(studentReqDto.getEmail());
+        student.setPhone(studentReqDto.getPhone());
+        student.setGender(studentReqDto.getGender());
+        student.setDob(studentReqDto.getDob());
+        student.setBranch(studentReqDto.getBranch());
+        student.setYear(studentReqDto.getYear());
+        student.setRollNo(studentReqDto.getRollNo());
+        student.setCity(studentReqDto.getCity());
+        student.setUpdatedAt(LocalDateTime.now());
+        repository.save(student);
+
+        return updateStudentRespDto(student);
     }
+
+    private UpdateStudentRespDto updateStudentRespDto(Student student) {
+        UpdateStudentRespDto studentRespDto = new UpdateStudentRespDto();
+        studentRespDto.setId(student.getId());
+        studentRespDto.setName(student.getName());
+        studentRespDto.setEmail(student.getEmail());
+        studentRespDto.setPhone(student.getPhone());
+        studentRespDto.setGender(student.getGender());
+        studentRespDto.setDob(student.getDob());
+        studentRespDto.setBranch(student.getBranch());
+        studentRespDto.setYear(student.getYear());
+        studentRespDto.setRollNo(student.getRollNo());
+        studentRespDto.setCity(student.getCity());
+        return studentRespDto;
+    }
+
 }
