@@ -2,7 +2,7 @@ package com.example.student_crud.dto;
 
 import java.time.LocalDate;
 
-public class CreateStudentRespDto {
+public class GetStudentResponceDto {
 
     private long id;
     private String name;
