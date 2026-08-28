@@ -1,7 +1,7 @@
 package com.example.student_crud.controller;
 
 import com.example.student_crud.dto.CreateStudentReqDto;
-import com.example.student_crud.dto.CreateStudentRespDto;
+import com.example.student_crud.dto.GetStudentResponceDto;
 import com.example.student_crud.dto.UpdateStudentReqDto;
 import com.example.student_crud.dto.UpdateStudentRespDto;
 import com.example.student_crud.service.StudentService;
@@ -20,8 +20,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateStudentRespDto> createStudent(CreateStudentReqDto studentReqDto){
-        CreateStudentRespDto studentRespDto =  studentService.createStudent(studentReqDto);
+    public ResponseEntity<GetStudentResponceDto> createStudent(CreateStudentReqDto studentReqDto){
+        GetStudentResponceDto studentRespDto =  studentService.createStudent(studentReqDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(studentRespDto);
     }
 
@@ -33,4 +33,8 @@ public class StudentController {
        return ResponseEntity.status(HttpStatus.OK).body(studentResp);
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<GetStudentResponceDto> getById(@PathVariable long id){
+      GetStudentResponceDto studentResponceDto = studentService.getById(id);
+    }
 }
